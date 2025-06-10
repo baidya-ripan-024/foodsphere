@@ -74,7 +74,7 @@ This project provides a seamless and secure experience for both **users** and **
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/foodsphere.git
+git clone https://github.com/baidya-ripan-024/foodsphere.git
 
 # Configure PostgreSql credentials in application.yml
 
