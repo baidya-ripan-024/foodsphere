@@ -1,0 +1,4 @@
+package com.foodsphere.config;
+
+public class JwtConstant {
+}
