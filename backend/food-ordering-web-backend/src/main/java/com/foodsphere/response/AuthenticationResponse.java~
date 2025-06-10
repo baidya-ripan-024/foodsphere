@@ -1,4 +1,0 @@
-package com.foodsphere.response;
-
-public class AuthenticationResponse {
-}
