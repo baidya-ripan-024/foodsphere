@@ -1,0 +1,305 @@
+API-TESTING EXAMPLE
+=====================
+1. signup
+----------
+http://localhost:8000/auth/signup [post]
+
+examples: 
+
+a. Customer User - John Doe
+{
+  "fullName": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "role": "ROLE_CUSTOMER",
+  "favourites": [],
+  "addresses": [
+    {
+      "streetAddress": "123 Main St",
+      "city": "New York",
+      "country": "USA",
+      "postalCode": "10001"
+    }
+  ]
+}
+
+b. Customer User - Jane Smith
+{
+  "fullName": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "password": "secure456",
+  "role": "ROLE_CUSTOMER",
+  "favourites": [],
+  "addresses": [
+    {
+      "streetAddress": "456 Maple Avenue",
+      "city": "Los Angeles",
+      "country": "USA",
+      "postalCode": "90001"
+    }
+  ]
+}
+
+c. Customer User - Rahul Verma
+{
+  "fullName": "Rahul Verma",
+  "email": "rahul.verma@example.com",
+  "password": "rahulPass789",
+  "role": "ROLE_CUSTOMER",
+  "favourites": [],
+  "addresses": []
+}
+
+d. Admin User - Admin Boss
+{
+  "fullName": "Admin Boss",
+  "email": "admin@example.com",
+  "password": "adminSecure@123",
+  "role": "ROLE_ADMIN",
+  "favourites": [],
+  "addresses": [
+    {
+      "streetAddress": "789 Corporate Blvd",
+      "city": "San Francisco",
+      "country": "USA",
+      "postalCode": "94105"
+    }
+  ]
+}
+
+e. Restaurant Owner - Ramesh Chef
+{
+  "fullName": "Ramesh Chef",
+  "email": "ramesh.chef@foodhub.com",
+  "password": "chefSpecial123",
+  "role": "ROLE_RESTAURANT_OWNER",
+  "favourites": [],
+  "addresses": [
+    {
+      "streetAddress": "99 Food Street",
+      "city": "Mumbai",
+      "country": "India",
+      "postalCode": "400001"
+    }
+  ]
+}
+
+
+2. signin
+----------
+http://localhost:8000/auth/signin [post]
+
+examples:
+
+
+a. Restaurant Owner - Ramesh Chef
+{
+    "email": "ramesh.chef@foodhub.com",
+    "password": "chefSpecial123"
+}
+
+b. Admin User - Admin Boss
+{
+    "email": "admin@example.com",
+    "password": "adminSecure@123"
+}
+
+c. Customer User - John Doe
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+
+
+
+3. restaurant
+--------------
+
+a. create restaurant - http://localhost:8000/api/admin/restaurants [post]
+
+{
+  "name": "La Bella Italia",
+  "description": "Family-run trattoria famous for handmade pasta and wood-fired pizzas.",
+  "cuisineType": "Italian",
+  "address": {
+    "streetAddress": "12 Via Roma",
+    "city": "Florence",
+    "country": "Italy",
+    "postalCode": "50123"
+  },
+  "contactInformation": {
+    "email": "contact@labellaitalia.it",
+    "mobile": "+39-055-123-4567",
+    "facebook": "https://facebook.com/LaBellaItalia"
+  },
+  "openingHours": "Mon-Sun 11:30-23:00",
+  "images": [
+    "https://cdn.example.com/restaurants/italia/front.jpg",
+    "https://cdn.example.com/restaurants/italia/pizza.jpg"
+  ]
+}
+
+b. update restaurant - http://localhost:8000/api/admin/restaurants/{restaurantId} [put]
+
+{
+  "name": "La Bella Italia - Updated",
+  "description": "Now offering gluten-free pasta and vegan options.",
+  "cuisineType": "Italian",
+  "address": {
+    "streetAddress": "12 Via Roma",
+    "city": "Florence",
+    "country": "Italy",
+    "postalCode": "50123"
+  },
+  "contactInformation": {
+    "email": "newcontact@labellaitalia.it",
+    "mobile": "+39-055-987-6543",
+    "facebook": "https://facebook.com/LaBellaItalia"
+  },
+  "openingHours": "Mon-Sun 11:00-22:30",
+  "images": [
+    "https://cdn.example.com/restaurants/italia/front-new.jpg"
+  ]
+}
+
+
+c. delete restaurant - http://localhost:8000/api/admin/restaurants/{restaurantId} [delete]
+
+d. update restaurant status - http://localhost:8000/api/admin/restaurants/{restaurantId}/status [put]
+
+e. Finds a restaurant by the owner's user ID - http://localhost:8000/api/admin/restaurants/user [get]
+
+f. Add resturant to favourites - http://localhost:8000/api/restaurants/{restaurantId}/add-favourites [put]
+
+g. get all restaurants - {{BASE_URL}}/api/restaurants [get]
+
+h. get restaurant by restaurant id - {{BASE_URL}}/api/restaurants/{restaurantId} [get]
+
+i. search restaurant - {{BASE_URL}}/api/restaurants/search?keyword={searchquery} [get]
+
+
+4. category
+-----------------
+
+a. create category - {{BASE_URL}}/api/category/create [post]
+
+{
+  "name" : "Biryani"
+}
+
+b. get category by id - {{BASE_URL}}/api/category/{categoryId} [get]
+
+c. get all category of a particular restaurant - {{BASE_URL}}/api/category/restaurant [get]
+
+
+5. Ingridients-category
+------------------------
+
+a. create ingridients category - {{BASE_URL}}/api/admin/ingredients/category/create [post]
+
+{
+  "name": "Spices",
+  "restaurantId": 2
+}
+
+b. create ingredients items - {{BASE_URL}}/api/admin/ingredients/items/create [post]
+
+{
+  "name": "Oregano",
+  "categoryId": 5,
+  "restaurantId": 2
+}
+
+c. Finds all ingredients items for a given restaurant ID. - {{BASE_URL}}/api/admin/ingredients/restaurant/restaurantId [get]
+
+d. {{BASE_URL}}/api/admin/ingredients/restaurant/2/category - {{BASE_URL}}/api/admin/ingredients/restaurant/restaurantId/category [get]
+
+e. Toggles the stock status of an ingredient item. - {{BASE_URL}}/api/admin/ingredients/stock/{id} [put]
+
+
+6. food
+--------
+
+a. create food - {{BASE_URL}}/api/admin/foods/create [post]
+
+{
+  "restaurantId": 2,
+  "name": "Sahi Mutton Biryani",
+  "description": "Classic Mutton Biryani",
+  "price": 299,
+  "seasonal": false,
+  "vegetarian": false,
+  "category": {
+    "name":"Biryani"
+  },
+  "images": [
+    "https://example.com/images/biryani.jpg"
+  ],
+  "ingredients": [
+    
+  ]
+}
+
+b. update food availability - {{BASE_URL}}/api/admin/foods/{id} [put]
+
+c. delete food - {{BASE_URL}}/api/admin/foods/{id} - [delete]
+
+
+7. cart
+-------
+
+a. add item to cart - {{BASE_URL}}/api/cart/add [post]
+{
+  "foodId": 3,
+  "quantity": 2,
+  "ingredients": [
+    "cheese",
+    "basil"
+  ]
+}
+
+
+b. update cart item - {{BASE_URL}}/api/cart-item/update [put]
+
+{
+  "cartItemId": 1,
+  "quantity": 5
+}
+
+
+c. get cart item - {{BASE_URL}}/api/cart [get]
+
+d. clear cart - {{BASE_URL}}/api/cart/clear [delete]
+
+e. revome cart item - {{BASE_URL}}/api/cart-item/{id}/remove [delete]
+
+
+8. order
+---------
+
+1. add order - {{BASE_URL}}/api/order [post]
+
+{
+  "restaurantId": 2,
+  "deliveryAddress": {
+    "streetAddress": "123 Foodie Lane",
+    "city": "Gourmet City",
+    "country": "Wonderland",
+    "postalCode": "123456"
+  }
+}
+
+2. get user's order - {{BASE_URL}}/api/order/user [get]
+
+3. delete order - {{BASE_URL}}/api/order/{id} [delete]
+
+4. update order status - {{BASE_URL}}/api/admin/order/2/DELIVERED [put]
+
+5. get restaurant's orders - {{BASE_URL}}/api/admin/order/restaurant/2 [get]
+
+
+
+
+
+
+
