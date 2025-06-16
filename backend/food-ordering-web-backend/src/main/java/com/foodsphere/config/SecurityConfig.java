@@ -52,7 +52,8 @@ public class SecurityConfig {
                 .build();
     }
 
-    private CorsConfigurationSource corsConfigurationSource() {
+    @Bean
+    protected CorsConfigurationSource corsConfigurationSource() {
         logger.info("Configuring CORS");
 
         return new CorsConfigurationSource() {
@@ -60,9 +61,10 @@ public class SecurityConfig {
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration config = new CorsConfiguration();
 
-                config.setAllowedOrigins(List.of("http://localhost:5173/"));
-                config.setAllowedMethods(Collections.singletonList("*"));
-                config.setExposedHeaders(List.of("Authorization"));
+                config.setAllowedOrigins(List.of("http://localhost:5173/", "https://foodsphere.vercel.app/"));
+                config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                config.setExposedHeaders(List.of("Authorization", "Content-Type", "Accept"));
+                config.setAllowedHeaders(List.of("Authorization"));
                 config.setMaxAge(3600L);
                 config.setAllowCredentials(true);
 
