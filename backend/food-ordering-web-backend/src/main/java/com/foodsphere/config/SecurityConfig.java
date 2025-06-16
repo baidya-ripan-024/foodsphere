@@ -61,7 +61,7 @@ public class SecurityConfig {
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration config = new CorsConfiguration();
 
-                config.setAllowedOrigins(List.of("http://localhost:5173/", "https://foodsphere.vercel.app/"));
+                config.setAllowedOrigins(List.of("http://localhost:5173/", "https://foodsphere.vercel.app"));
                 config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                 config.setExposedHeaders(List.of("Authorization", "Content-Type", "Accept"));
                 config.setAllowedHeaders(List.of("Authorization"));
