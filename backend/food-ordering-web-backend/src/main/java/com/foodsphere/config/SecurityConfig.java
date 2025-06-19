@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Collections;
 import java.util.List;
@@ -56,22 +57,25 @@ public class SecurityConfig {
     protected CorsConfigurationSource corsConfigurationSource() {
         logger.info("Configuring CORS");
 
-        return new CorsConfigurationSource() {
-            @Override
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                CorsConfiguration config = new CorsConfiguration();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of(
+                "http://localhost:5173",
+                "http://localhost:5174",
+                "https://foodsphere.vercel.app")
+        );
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*")); // Allow all headers
+        config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
 
-                config.setAllowedOrigins(List.of("http://localhost:5173/", "https://foodsphere.vercel.app"));
-                config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                config.setExposedHeaders(List.of("Authorization", "Content-Type", "Accept"));
-                config.setAllowedHeaders(List.of("Authorization"));
-                config.setMaxAge(3600L);
-                config.setAllowCredentials(true);
+        // Register CORS config for all endpoints
+        org.springframework.web.cors.UrlBasedCorsConfigurationSource source =
+                new org.springframework.web.cors.UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
 
-                return config;
-            }
-        };
+        return source;
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager() throws Exception{
