@@ -1,4 +1,4 @@
-package com.foodsphere.response;
+package com.foodsphere.dto.auth;
 
 import com.foodsphere.enums.Role;
 import lombok.AllArgsConstructor;
@@ -8,11 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationResponse {
-
-    private String jwt;
-
-    private String message;
-
+public class LoginResponse {
+    private String token;
+    private String fullName;
+    private String email;
     private Role role;
 }

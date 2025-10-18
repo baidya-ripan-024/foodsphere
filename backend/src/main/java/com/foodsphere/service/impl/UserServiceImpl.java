@@ -16,42 +16,21 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
 
     @Override
     public User findUserByJwt(String jwt) throws Exception {
-        String email = getEmailFromJwt(jwt);
-        log.debug("Attempting to find user with email {}", email);
+        String email = jwtProvider.getEmailFromToken(jwt);
 
-        User user = userRepository.findByEmail(email);
-
-        if (user == null) {
-            log.error("User not found with email {}", email);
-            throw new Exception("User not found with email " + email);
-        }
-
-        return user;
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new Exception("User not found with email: " + email));
     }
 
     @Override
     public User findUserByEmail(String email) throws Exception {
-        log.debug("Attempting to find user with email {}", email);
-
-        User user = userRepository.findByEmail(email);
-
-        if (user == null) {
-            log.error("User not found with email {}", email);
-            throw new Exception("User not found with email " + email);
-        }
-
-        return user;
-    }
-
-    private String getEmailFromJwt(String jwt) {
-        log.debug("Extracting email from JWT token");
-        return jwtProvider.getEmailFromToken(jwt);
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new Exception("User not found with email: " + email));
     }
 
 }

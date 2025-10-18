@@ -2,6 +2,7 @@ package com.foodsphere.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Cart entity representing a shopping cart.
  * It contains information about the customer, total price, and items in the cart.
  */
-@Data
+@Data @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
