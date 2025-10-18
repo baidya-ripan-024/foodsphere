@@ -1,13 +1,14 @@
-# server port
+# port config
 server:
   port: 8000
+  servlet:
+    context-path: /api/v1
 
-# application name
 spring:
   application:
-    name: food-ordering-webapp
+    name: food-app
 
-  # database configuration
+  # db config
   datasource:
     url: jdbc:postgresql://localhost:5432/${DB_NAME}
     username: ${DB_USERNAME}
@@ -23,25 +24,28 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
 
-  # jpa and hibernate configuration
+  # jpa and hibernate config
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     naming:
-      physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
 # logging
 logging:
   level:
-    org.springframework.security: DEBUG
-    com.foodsphere.config.JwtTokenValidator: DEBUG
+    root: INFO
 
-# stripe payment configuration
-stripe:
-  secretKey: ${STRIPE_SECRET_KEY}
-  successUrl: http://localhost:5173/payment/success
-  cancelUrl: http://localhost:5173/payment/cancel
-  currency: USD
+# security config
+application:
+  security:
+    jwt:
+      header: Authorization
+      secretKey: 79cc7b97590093a0b8d187a8a724e39a385d6fe051a5fcdf14e1ff642e48e6eb
+      expiration: 86400000
+    cors:
+      allowed-origins:
+        - http://localhost:5173

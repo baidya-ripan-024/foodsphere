@@ -1,0 +1,44 @@
+# Compiled source
+*.class
+*.jar
+*.war
+*.ear
+
+# Build directories
+target/
+build/
+out/
+.gradle/
+.mvn/
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+*.orig
+*.env
+
+# Dependency or cache dirs
+node_modules/
+backend/.env
+.env.local
+
+# Maven wrapper files (no matter where)
+mvnw
+mvnw.cmd
+
+# Git or helper files
+.gitattributes
+HELP.md

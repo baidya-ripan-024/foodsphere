@@ -1,14 +1,12 @@
 package com.foodsphere.service.impl;
 
-import com.foodsphere.config.JwtProvider;
+import com.foodsphere.security.JwtProvider;
 import com.foodsphere.model.User;
 import com.foodsphere.repository.UserRepository;
 import com.foodsphere.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * This class is the implementation of the UserService interface.
@@ -53,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     private String getEmailFromJwt(String jwt) {
         log.debug("Extracting email from JWT token");
-        return jwtProvider.getEmailFromJwt(jwt);
+        return jwtProvider.getEmailFromToken(jwt);
     }
 
 }

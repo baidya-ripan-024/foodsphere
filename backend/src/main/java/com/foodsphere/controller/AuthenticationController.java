@@ -1,6 +1,6 @@
 package com.foodsphere.controller;
 
-import com.foodsphere.config.JwtProvider;
+import com.foodsphere.security.JwtProvider;
 import com.foodsphere.model.Cart;
 import com.foodsphere.model.USER_ROLE;
 import com.foodsphere.model.User;
